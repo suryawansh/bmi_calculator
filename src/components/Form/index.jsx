@@ -42,6 +42,7 @@ const Form = () => {
             helperText="Please enter your name"
             id="username"
             label="Name"
+            required
             value={name}
             onChange={(event) => {
               setName(event.target.value);
@@ -77,6 +78,7 @@ const Form = () => {
             label="Age"
             helperText="Please enter your age"
             placeholder="select your age"
+            required
             fullWidth
             value={age}
             onChange={(event) => {
@@ -93,6 +95,7 @@ const Form = () => {
             helperText="Please enter your weight"
             id="weight"
             label="Weight(in kg)"
+            required
             fullWidth
             value={weight}
             onChange={(event) => {
@@ -110,6 +113,7 @@ const Form = () => {
             max="100"
             helperText="Please enter your height"
             label="Height(in m)"
+            required
             fullWidth
             value={height}
             onChange={(event) => {
@@ -130,8 +134,16 @@ const Form = () => {
             variant="contained"
             size="large"
             onClick={() => {
-              const bmiCalc = weight / (height * height);
-              setOutput(`The BMI of ${gender} ${name} aged ${age}=${bmiCalc} `);
+              if (weight <= 20) {
+                alert("Please enter weight more than 2 kg");
+              } else if (!height <= 20) {
+                alert("Please enter height more than 0.5 m");
+              } else {
+                const bmiCalc = weight / (height * height);
+                setOutput(
+                  `The BMI of ${gender} ${name} aged ${age}= ${bmiCalc} `
+                );
+              }
             }}
           >
             Calculate
