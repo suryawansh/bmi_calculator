@@ -99,7 +99,7 @@ const Form = () => {
             fullWidth
             value={weight}
             onChange={(event) => {
-              setWeight(event.target.value);
+              setWeight(parseFloat(event.target.value));
             }}
           />
           <br></br>
@@ -117,7 +117,7 @@ const Form = () => {
             fullWidth
             value={height}
             onChange={(event) => {
-              setHeight(event.target.value);
+              setHeight(parseFloat(event.target.value));
             }}
           />
         </Grid>
