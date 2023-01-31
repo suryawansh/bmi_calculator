@@ -10,6 +10,7 @@ import {
   FormControl,
   Select,
   Box,
+  Typography,
 } from "@mui/material";
 
 const Form = () => {
@@ -134,15 +135,13 @@ const Form = () => {
             variant="contained"
             size="large"
             onClick={() => {
-              if (weight <= 20) {
+              if (weight <= 2) {
                 alert("Please enter weight more than 2 kg");
-              } else if (!height <= 20) {
+              } else if (height <= 0.5) {
                 alert("Please enter height more than 0.5 m");
               } else {
                 const bmiCalc = weight / (height * height);
-                setOutput(
-                  `The BMI of ${gender} ${name} aged ${age}= ${bmiCalc} `
-                );
+                setOutput(bmiCalc);
               }
             }}
           >
@@ -155,14 +154,34 @@ const Form = () => {
               width: 300,
               height: 300,
               border: "1px dashed grey",
-              backgroundColor: "primary",
-              "&:hover": {
-                backgroundColor: "primary.main",
-                opacity: [0.9, 0.8, 0.7],
-              },
+              wordWrap: "break-word",
             }}
           >
-            {output}
+            {output !== "" && (
+              <>
+                <Typography variant="body1">
+                  <b>Name:</b> {name}
+                </Typography>
+                <Typography variant="body1">
+                  <b>Gender:</b> {gender}
+                </Typography>
+                <Typography variant="body1">
+                  <b>Age</b>: {age}
+                </Typography>
+                <Typography variant="body1">
+                  <b>Weight:</b> {weight}
+                </Typography>
+                <Typography variant="body1">
+                  <b>Height:</b> {height}
+                </Typography>
+                <br></br>
+                <Typography variant="h5">
+                  <b>
+                    BMI:<br></br> {output}
+                  </b>
+                </Typography>
+              </>
+            )}
           </Box>
         </Grid>
       </Grid>
