@@ -14,12 +14,12 @@ import {
 } from "@mui/material";
 
 const Form = () => {
-  const [gender, setGender] = React.useState("");
-  const [age, setAge] = React.useState("");
   const [name, setName] = React.useState("");
-  const [height, setHeight] = React.useState("");
-  const [weight, setWeight] = React.useState("");
-  const [output, setOutput] = React.useState("");
+  const [gender, setGender] = React.useState("");
+  const [age, setAge] = React.useState(1);
+  const [weight, setWeight] = React.useState(2);
+  const [height, setHeight] = React.useState(0.5);
+  const [output, setOutput] = React.useState(null);
 
   return (
     <Grid
@@ -83,7 +83,7 @@ const Form = () => {
             fullWidth
             value={age}
             onChange={(event) => {
-              setAge(parseInt(event.target.value));
+              setAge(parseInt(Math.abs(event.target.value ?? 1)));
             }}
           />
           <br></br>
@@ -100,7 +100,7 @@ const Form = () => {
             fullWidth
             value={weight}
             onChange={(event) => {
-              setWeight(parseFloat(event.target.value));
+              setWeight(parseFloat(Math.abs(event.target.value ?? 2)));
             }}
           />
           <br></br>
@@ -118,7 +118,7 @@ const Form = () => {
             fullWidth
             value={height}
             onChange={(event) => {
-              setHeight(parseFloat(event.target.value));
+              setHeight(parseFloat(event.target.value ?? 0.5));
             }}
           />
         </Grid>
@@ -141,7 +141,7 @@ const Form = () => {
                 alert("Please enter height more than 0.5 m");
               } else {
                 const bmiCalc = weight / (height * height);
-                setOutput(bmiCalc);
+                setOutput(parseFloat(bmiCalc).toFixed(2));
               }
             }}
           >
@@ -157,7 +157,7 @@ const Form = () => {
               wordWrap: "break-word",
             }}
           >
-            {output !== "" && (
+            {output && (
               <>
                 <Typography variant="body1">
                   <b>Name:</b> {name}
@@ -176,9 +176,7 @@ const Form = () => {
                 </Typography>
                 <br></br>
                 <Typography variant="h5">
-                  <b>
-                    BMI:<br></br> {output}
-                  </b>
+                  <b>BMI: {output}</b>
                 </Typography>
               </>
             )}
